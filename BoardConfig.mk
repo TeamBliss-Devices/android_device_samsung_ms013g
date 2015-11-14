@@ -36,7 +36,7 @@ BOARD_KERNEL_CMDLINE := console=null androidboot.console=null androidboot.hardwa
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x1e00000
-TARGET_KERNEL_SOURCE := kernel/samsung/ms01lte
+TARGET_KERNEL_SOURCE := kernel/samsung/ms013g
 TARGET_KERNEL_CONFIG := cyanogenmod_ms013g_defconfig
 TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 
@@ -71,8 +71,8 @@ ENABLE_MODULAR_O3 := true
 ENABLE_LTO := true
 Link_Time_Optimizations := true
 TARGET_USE_ION_COMPAT := true
-TARGET_TC_ROM := 4.9-hybrid
-TARGET_TC_KERNEL := 4.9-hybrid
+TARGET_TC_ROM := 4.9-sm
+TARGET_TC_KERNEL := 4.9-sm
 TARGET_GCC_VERSION_EXP := $(TARGET_TC_ROM)
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := $(TARGET_TC_KERNEL)
 
