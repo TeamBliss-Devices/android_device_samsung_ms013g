@@ -684,30 +684,10 @@ on boot
     write /proc/sys/net/core/wmem_max  2097152
 
 # Services begin here
-# RIL
-service at_distributor /system/bin/at_distributor
-    class late_start
-    user root
-    group radio log
-	
-# for multi rild
-service ril-daemon1 /system/bin/rild -l /system/lib/libsec-ril-dsds.so -c 2
-    class main
-    socket rild2 stream 660 root radio
-    socket rild-debug2 stream 660 radio system
-    user root
-    disabled
-    group radio cache inet misc audio log qcom_diag system drmrpc sdcard_r sdcard_rw shell
-
 service adsprpcd /system/bin/adsprpcd
     class main
     user media
     group media
-
-service atfwd /system/bin/ATFWD-daemon
-    class late_start
-    user system
-    group system radio
 
 service audiod /system/bin/audiod
     class late_start
@@ -720,15 +700,6 @@ on property:vold.decrypt=trigger_restart_framework
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
     class core
     user root
-    oneshot
-
-on property:persist.data.ds_fmc_app.mode=1
-    start ds_fmc_appd
-
-service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
-    class late_start
-    group radio wifi inet
-    disabled
     oneshot
 
 #service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
@@ -958,3 +929,11 @@ on property:persist.radio.multisim.config=dsds
     stop ril-daemon
     start ril-daemon
     start ril-daemon1
+
+service ril-daemon1 /system/bin/rild -l /system/lib/libsec-ril-dsds.so -c 2
+    class main
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
+    user root
+    disabled
+    group radio cache inet misc audio log qcom_diag system drmrpc sdcard_r sdcard_rw shell
